@@ -80,22 +80,29 @@ int main(void)
   MX_GPIO_Init();
   MX_ADC1_Init();
   MX_CAN1_Init();
+  HAL_ADC_MspInit();
 
   /* USER CODE BEGIN 2 */
-
+  HAL_ADC_Start(ADC1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-  /* USER CODE END WHILE */
+	  HAL_ADC_PollForConversion(ADC1, 2000);  //Poll ADC1, timeout after 2 seconds
+	  HAL_ADC_GetValue(ADC1); //Get converted values
 
-  /* USER CODE BEGIN 3 */
+	  /*
+	   Insert code to access converted value of each pin in the ADC1 struct.
+	   You can find definition of ADC1 and each pin in HAL_ADC_MspInit();
+	   */
 
+	  /* USER CODE END WHILE */
   }
+  /* USER CODE BEGIN 3 */
+  HAL_ADC_Stop(ADC1);
   /* USER CODE END 3 */
-
 }
 
 /** System Clock Configuration
