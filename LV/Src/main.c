@@ -52,6 +52,7 @@
 void SystemClock_Config(void);
 void Error_Handler(void);
 
+
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 
@@ -90,13 +91,26 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_ADC_PollForConversion(ADC1, 2000);  //Poll ADC1, timeout after 2 seconds
+	  //Call ADC function to do whatever it needs to
+	  //Does PollForConversion and GetValue only read 1 readings or does it read multiple?
+	  //If it reads multiple does it store in an array? If not, where is the value stored?
+	  //
+	  if (HAL_OK != HAL_ADC_PollForConversion(ADC1, 500))//Poll ADC1, timeout after 0.5 seconds
+	  {
+		  //handle ADC error
+	  }
 	  HAL_ADC_GetValue(ADC1); //Get converted values
 
 	  /*
 	   Insert code to access converted value of each pin in the ADC1 struct.
 	   You can find definition of ADC1 and each pin in HAL_ADC_MspInit();
 	   */
+
+	  //Call GPIO to do whatever it needs to
+
+
+
+
 
 	  /* USER CODE END WHILE */
   }
