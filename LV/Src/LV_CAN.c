@@ -99,7 +99,7 @@ void CAN_TX(uint32_t ID, uint8_t * valueary, uint8_t * nameary)
 *     Function Description:
 *
 ***************************************************************************/
-void CAN_RX(void)
+CanRxMsgTypeDef CAN_RX(void)
 {
 	//initialization for message frames
 	if(canflgrx == 1)
@@ -123,5 +123,31 @@ void CAN_RX(void)
 	//TODO Test with CAN_FIFO0 and CAN_FIFO1 and see what it does
 	RX_Status = HAL_CAN_Receive(&hcan1, CAN_FIFO0, timeout);
 
+	return RxMsg;
 }
 
+
+/***************************************************************************
+*
+*     Function Information
+*
+*     Name of Function:
+*
+*     Programmer's Name:
+*
+*     Function Return Type:
+*
+*     Parameters (list data type, name, and comment one per line):
+*		1.
+*
+*     Global Dependents:
+*		1.
+*
+*     Function Description:
+*
+***************************************************************************/
+void _read_msg(CanRxMsgTypeDef msg, uint8_t * name, uint8_t * value)
+{
+	* name = msg.data[0];
+	* value = msg.data[1];
+}
