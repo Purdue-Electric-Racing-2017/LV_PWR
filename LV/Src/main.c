@@ -52,7 +52,6 @@
 void SystemClock_Config(void);
 void Error_Handler(void);
 
-
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 
@@ -66,58 +65,36 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+	uint32_t ADC_Values[11];
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+	HAL_Init();
 
   /* Configure the system clock */
-  SystemClock_Config();
+	SystemClock_Config();
 
   /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_ADC1_Init();
-  MX_CAN1_Init();
-  HAL_ADC_MspInit();
+	MX_GPIO_Init();
+	MX_ADC1_Init();
+	MX_CAN1_Init();
 
   /* USER CODE BEGIN 2 */
-  HAL_ADC_Start(ADC1);
+	HAL_ADC_MspInit(&hadc1);
+	HAL_ADC_Start(&hadc1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  //Call ADC function to do whatever it needs to
-	  //Does PollForConversion and GetValue only read 1 readings or does it read multiple?
-	  //If it reads multiple does it store in an array? If not, where is the value stored?
-	  //
-	  if (HAL_OK != HAL_ADC_PollForConversion(ADC1, 500))//Poll ADC1, timeout after 0.5 seconds
-	  {
-		  //handle ADC error
-	  }
-	  HAL_ADC_GetValue(ADC1); //Get converted values
-
-	  /*
-	   Insert code to access converted value of each pin in the ADC1 struct.
-	   You can find definition of ADC1 and each pin in HAL_ADC_MspInit();
-	   */
-
-	  //Call GPIO to do whatever it needs to
-
-
-
-
-
-	  /* USER CODE END WHILE */
-  }
   /* USER CODE BEGIN 3 */
-  HAL_ADC_Stop(ADC1);
+	  HAL_ADC_PollForConversion(&hadc1, 1000) {
+		  ADC_Values = HAL_ADC_GetValue(&hadc1);
+	  }	  
   /* USER CODE END 3 */
-}
+  }
 
 /** System Clock Configuration
 */
@@ -171,7 +148,8 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+	HAL_ADC_Stop(ADC1);
+	HAL_ADC_MspDeInit(ADC1);
 /* USER CODE END 4 */
 
 /**
@@ -183,7 +161,7 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler */
   /* User can add his own implementation to report the HAL error return state */
-  while(1) 
+  while(1)
   {
   }
   /* USER CODE END Error_Handler */ 
