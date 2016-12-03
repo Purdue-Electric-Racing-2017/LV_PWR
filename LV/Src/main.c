@@ -92,10 +92,10 @@ int main(void)
   /* USER CODE BEGIN 3 */
 	  HAL_ADC_PollForConversion(&hadc1, 1000) {
 		  ADC_Values = HAL_ADC_GetValue(&hadc1);
-	  }	  
+	  }
   /* USER CODE END 3 */
   }
-
+}
 /** System Clock Configuration
 */
 void SystemClock_Config(void)
