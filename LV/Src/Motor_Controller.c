@@ -17,12 +17,12 @@
 *     Function Return Type: CanTxMsgTypeDef
 *
 *     Parameters (list data type, name, and comment one per line):
-*		1.
+*		1. int, data, data to be filled in can frame
 *
 *     Global Dependents:
 *		1.
 *
-*     Function Description:
+*     Function Description: create frame for motor controller torque reference
 *
 ***************************************************************************/
 CanTxMsgTypeDef torque_ref (int data)
@@ -49,19 +49,19 @@ CanTxMsgTypeDef torque_ref (int data)
 *
 *     Function Information
 *
-*     Name of Function:
+*     Name of Function: torque_ref
 *
-*     Programmer's Name:
+*     Programmer's Name: Josh Shao
 *
-*     Function Return Type:
+*     Function Return Type: CanTxMsgTypeDef
 *
 *     Parameters (list data type, name, and comment one per line):
-*		1.
+*		1. int, data, data to be filled in can frame
 *
 *     Global Dependents:
 *		1.
 *
-*     Function Description:
+*     Function Description: create frame for motor controller inhibit control
 *
 ***************************************************************************/
 CanTxMsgTypeDef inhibit (int data)
@@ -88,19 +88,19 @@ CanTxMsgTypeDef inhibit (int data)
 *
 *     Function Information
 *
-*     Name of Function:
+*     Name of Function: torque_ref
 *
-*     Programmer's Name:
+*     Programmer's Name: Josh Shao
 *
-*     Function Return Type:
+*     Function Return Type: CanTxMsgTypeDef
 *
 *     Parameters (list data type, name, and comment one per line):
-*		1.
+*		1. int, data, data to be filled in can frame
 *
 *     Global Dependents:
 *		1.
 *
-*     Function Description:
+*     Function Description: create frame for motor controller station address change
 *
 ***************************************************************************/
 CanTxMsgTypeDef station_address (int data)
