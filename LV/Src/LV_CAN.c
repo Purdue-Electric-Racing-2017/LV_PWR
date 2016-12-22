@@ -12,8 +12,6 @@
 #include "gpio.h"
 #include "LV_CAN.h"
 
-static int canflgrx = 1;  //CAN receive flag
-static int canflgtx = 1;  //CAN transmit flag
 
 
 /***************************************************************************
@@ -43,9 +41,6 @@ static int canflgtx = 1;  //CAN transmit flag
 void CAN_TX(uint32_t ID, uint8_t * valueary, uint8_t * nameary)
 {
 	//initialization for message frames
-	if(canflgtx == 1)
-	{
-		canflgtx = 0;
 
 		//Create transmit status
 		HAL_StatusTypeDef TX_Status;  //Record transmit status
@@ -61,7 +56,6 @@ void CAN_TX(uint32_t ID, uint8_t * valueary, uint8_t * nameary)
 
 		//Create timeout value
 		uint32_t timeout = 500;
-	}
 
 	//Setup sender ID
 	TxMsg.StdId = ID;
@@ -102,9 +96,6 @@ void CAN_TX(uint32_t ID, uint8_t * valueary, uint8_t * nameary)
 CanRxMsgTypeDef CAN_RX(void)
 {
 	//initialization for message frames
-	if(canflgrx == 1)
-	{
-		canflgrx = 0;
 
 		//Create receive status
 		HAL_StatusTypeDef RX_Status;  //Record transmit status
@@ -117,7 +108,7 @@ CanRxMsgTypeDef CAN_RX(void)
 
 		//Create timeout value
 		uint32_t timeout = 500;
-	}
+
 
 	//Receive message frame
 	//TODO Test with CAN_FIFO0 and CAN_FIFO1 and see what it does
