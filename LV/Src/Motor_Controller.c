@@ -5,6 +5,7 @@
  *      Author: Josh Shao
  */
 
+#include "Motor_Controller.h"
 
 /***************************************************************************
 *
@@ -28,19 +29,23 @@
 CanTxMsgTypeDef torque_ref (int data)
 {
 	CanTxMsgTypeDef Msg;
+	uint8_t data0 = REGID_TORQUE;
+	uint8_t data1 = INT_UINT8_MASK & data;
+	uint8_t data2 = INT_UINT8_MASK & (data >> INT_UINT8_SHIFT4);
+
 	Msg.IDE = CAN_ID_STD;  //Standard CAN frame, NOT EXTENDED
 	Msg.RTR = CAN_RTR_DATA;
-	Msg.DLC = 3;
+	Msg.DLC = CAN_DATA_LEN3;
 
 	//Station address for receiving
-	Msg.StdId = 0x201;
+	Msg.StdId = CAN_STATION_ADDRESS;
 
 	//Fill in data
-	Msg.Data[0] = 0x90;
+	Msg.Data[0] = data0;
 
-	//TODO Need to resize data into char
-	Msg.Data[1] = data;
-	Msg.Data[2] = data;
+	//data are in unit8_t
+	Msg.Data[1] = data1;
+	Msg.Data[2] = data2;
 
 	return Msg;
 }
@@ -67,19 +72,23 @@ CanTxMsgTypeDef torque_ref (int data)
 CanTxMsgTypeDef inhibit (int data)
 {
 	CanTxMsgTypeDef Msg;
+	uint8_t data0 = REGID_INHIBIT;
+	uint8_t data1 = INT_UINT8_MASK & data;
+	uint8_t data2 = INT_UINT8_MASK & (data >> INT_UINT8_SHIFT4);
+
 	Msg.IDE = CAN_ID_STD;  //Standard CAN frame, NOT EXTENDED
 	Msg.RTR = CAN_RTR_DATA;
-	Msg.DLC = 3;
+	Msg.DLC = CAN_DATA_LEN3;
 
 	//Station address for receiving
-	Msg.StdId = 0x201;
+	Msg.StdId = CAN_STATION_ADDRESS;
 
 	//Fill in data
-	Msg.Data[0] = 0x51;
+	Msg.Data[0] = data0;
 
-	//TODO Need to resize data into char
-	Msg.Data[1] = data;
-	Msg.Data[2] = data;
+	//data are in unit8_t
+	Msg.Data[1] = data1;
+	Msg.Data[2] = data2;
 
 	return Msg;
 }
@@ -106,19 +115,23 @@ CanTxMsgTypeDef inhibit (int data)
 CanTxMsgTypeDef station_address (int data)
 {
 	CanTxMsgTypeDef Msg;
+	uint8_t data0 = REGID_STATION_ADDRESS_CHANGE;
+	uint8_t data1 = INT_UINT8_MASK & data;
+	uint8_t data2 = INT_UINT8_MASK & (data >> INT_UINT8_SHIFT4);
+
 	Msg.IDE = CAN_ID_STD;  //Standard CAN frame, NOT EXTENDED
 	Msg.RTR = CAN_RTR_DATA;
-	Msg.DLC = 3;
+	Msg.DLC = CAN_DATA_LEN3;
 
 	//Station address for receiving
-	Msg.StdId = 0x201;
+	Msg.StdId = CAN_STATION_ADDRESS;
 
 	//Fill in data
-	Msg.Data[0] = 0x68;
+	Msg.Data[0] = data0;
 
-	//TODO Need to resize data into char
-	Msg.Data[1] = data;
-	Msg.Data[2] = data;
+	//data are in unit8_t
+	Msg.Data[1] = data1;
+	Msg.Data[2] = data2;
 
 	return Msg;
 }
